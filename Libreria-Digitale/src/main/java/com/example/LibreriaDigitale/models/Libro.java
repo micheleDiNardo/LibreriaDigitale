@@ -1,12 +1,16 @@
 package com.example.LibreriaDigitale.models;
 
 import java.sql.Date;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity(name = "libro")
 public class Libro {
@@ -32,6 +36,12 @@ public class Libro {
 
     @Column(name = "numero_letture")
     private int numeroLettura;
+
+    @ManyToMany
+    @JoinTable(name = "utente_libro", joinColumns = {
+            @JoinColumn(name = "utente_idFK")
+    }, inverseJoinColumns = @JoinColumn(name = "libro_idFK"))
+    private Set<Utente> utenti;
 
     public int getId_libro() {
         return id_libro;

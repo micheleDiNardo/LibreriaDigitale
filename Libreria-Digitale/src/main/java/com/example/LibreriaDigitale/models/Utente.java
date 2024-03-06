@@ -1,10 +1,15 @@
 package com.example.LibreriaDigitale.models;
 
+import java.util.List;
+import java.util.Set;
+
 import jakarta.*;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity(name = "utente")
 public class Utente {
@@ -18,6 +23,9 @@ public class Utente {
     private String cognome;
 
     private String email;
+
+    @ManyToMany(mappedBy = "utenti", fetch = FetchType.EAGER)
+    private Set<Libro> libri;
 
     public int getId_utente() {
         return id_utente;
