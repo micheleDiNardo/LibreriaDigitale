@@ -8,5 +8,4 @@ import com.example.LibreriaDigitale.models.Utente;
 @Repository
 public interface UtenteRepository extends JpaRepository<Utente, Integer> {
     Utente findByEmail(String email);
-
 }

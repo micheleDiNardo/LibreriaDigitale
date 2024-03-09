@@ -28,13 +28,15 @@ public class Utente {
 
     private String password;
 
-    // @ManyToMany(mappedBy = "utenti", fetch = FetchType.EAGER)
-
     @ManyToMany
     @JoinTable(name = "utente_libro", joinColumns = {
             @JoinColumn(name = "utente_idFK")
     }, inverseJoinColumns = @JoinColumn(name = "libro_idFK"))
     private Set<Libro> libri;
+
+    public Set<Libro> getLibri() {
+        return libri;
+    }
 
     public int getId_utente() {
         return id_utente;

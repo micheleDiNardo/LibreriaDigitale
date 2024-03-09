@@ -38,11 +38,6 @@ public class Libro {
     @Column(name = "numero_letture")
     private int numeroLettura;
 
-    // @ManyToMany
-    // @JoinTable(name = "utente_libro", joinColumns = {
-    // @JoinColumn(name = "libro_idFK")
-    // }, inverseJoinColumns = @JoinColumn(name = "utente_idFK"))
-
     @ManyToMany(mappedBy = "libri", fetch = FetchType.EAGER)
     private Set<Utente> utenti;
 
