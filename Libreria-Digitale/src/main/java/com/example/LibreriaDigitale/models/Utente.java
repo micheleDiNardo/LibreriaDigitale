@@ -9,6 +9,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity(name = "utente")
@@ -26,7 +28,12 @@ public class Utente {
 
     private String password;
 
-    @ManyToMany(mappedBy = "utenti", fetch = FetchType.EAGER)
+    // @ManyToMany(mappedBy = "utenti", fetch = FetchType.EAGER)
+
+    @ManyToMany
+    @JoinTable(name = "utente_libro", joinColumns = {
+            @JoinColumn(name = "utente_idFK")
+    }, inverseJoinColumns = @JoinColumn(name = "libro_idFK"))
     private Set<Libro> libri;
 
     public int getId_utente() {
@@ -67,6 +74,10 @@ public class Utente {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void aggiungiLibro(Libro libro) {
+        libri.add(libro);
     }
 
 }

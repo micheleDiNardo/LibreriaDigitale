@@ -10,9 +10,11 @@ import com.example.LibreriaDigitale.login.TokenManager;
 import com.example.LibreriaDigitale.models.Utente;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-public class Controller {
+@RequestMapping("/api")
+public class ControllerUtente {
 
     @Autowired
     private AutorizzazioneService autoService;
@@ -28,7 +30,6 @@ public class Controller {
         }
 
         return ResponseEntity.badRequest().body("Credenziali non valide");
-
     }
 
 }

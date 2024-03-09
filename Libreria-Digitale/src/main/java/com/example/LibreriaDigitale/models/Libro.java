@@ -5,6 +5,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,10 +38,12 @@ public class Libro {
     @Column(name = "numero_letture")
     private int numeroLettura;
 
-    @ManyToMany
-    @JoinTable(name = "utente_libro", joinColumns = {
-            @JoinColumn(name = "utente_idFK")
-    }, inverseJoinColumns = @JoinColumn(name = "libro_idFK"))
+    // @ManyToMany
+    // @JoinTable(name = "utente_libro", joinColumns = {
+    // @JoinColumn(name = "libro_idFK")
+    // }, inverseJoinColumns = @JoinColumn(name = "utente_idFK"))
+
+    @ManyToMany(mappedBy = "libri", fetch = FetchType.EAGER)
     private Set<Utente> utenti;
 
     public int getId_libro() {
