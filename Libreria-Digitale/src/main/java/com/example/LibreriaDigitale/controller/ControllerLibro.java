@@ -20,6 +20,9 @@ import com.example.LibreriaDigitale.login.TokenManager;
 import com.example.LibreriaDigitale.models.Libro;
 import com.example.LibreriaDigitale.models.Utente;
 import com.example.LibreriaDigitale.services.LibreriaService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("api/libreria")
@@ -66,6 +69,7 @@ public class ControllerLibro {
             @RequestParam("idUtente") Integer idUtente,
             @RequestParam("idLibro") Integer idLibro,
             @RequestHeader("Authorization") String token) {
+
         if (!TokenManager.validatoreToken(token)) {
             throw new IllegalArgumentException("Token non valido");
         }
@@ -73,7 +77,35 @@ public class ControllerLibro {
         libroService.rimuoviLibroPerUtente(idUtente, idLibro);
 
         return ResponseEntity.ok("libro con id : " + idLibro + "rimosso all'utente con id: " + idUtente);
+    }
 
+    @PutMapping("modifica")
+    public ResponseEntity<String> modifcaLibro(
+            @RequestParam("idLibro") Integer idLibro,
+            @RequestBody Libro libroAggiornato,
+            @RequestHeader("Authorization") String token) {
+
+        if (!TokenManager.validatoreToken(token)) {
+            throw new IllegalArgumentException("Token non valido");
+        }
+
+        libroService.modificaLibro(idLibro, libroAggiornato);
+
+        return ResponseEntity.ok("modificato correttamente il libro con id : " + idLibro);
+    }
+
+    @PutMapping("lettura/{idLibro}")
+    public ResponseEntity<String> aumentaNumeroLetture(
+            @PathVariable Integer idLibro,
+            @RequestHeader("Authorization") String token) {
+
+        if (!TokenManager.validatoreToken(token)) {
+            throw new IllegalArgumentException("Token non valido");
+        }
+
+        libroService.incrementaNumeroLetture(idLibro);
+
+        return ResponseEntity.ok("il numero di letture è stato incrementato");
     }
 
 }

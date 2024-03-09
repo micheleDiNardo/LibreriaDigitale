@@ -1,5 +1,8 @@
 package com.example.LibreriaDigitale.services;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -31,6 +34,9 @@ public class LibreriaService {
                 .orElseThrow(() -> new RuntimeException("Utente non trovato"));
         Libro libro = libroRepo.findById(idLibro).orElseThrow(() -> new RuntimeException("Libro non trovato"));
 
+        LocalDate currentDate = LocalDate.now();
+        Date sqlDate = Date.valueOf(currentDate);
+        libro.setDataAggiuntaLibreria(sqlDate);
         utente.aggiungiLibro(libro);
         utenteRepository.save(utente);
     }
@@ -50,8 +56,35 @@ public class LibreriaService {
             throw new IllegalArgumentException("l'utente non ha quel libro");
         }
 
+        LocalDate currentDate = LocalDate.now();
+        Date sqlDate = Date.valueOf(currentDate);
+
+        libro.setDataEliminazione(sqlDate);
         utente.getLibri().remove(libro);
         utenteRepository.save(utente);
+    }
+
+    public void modificaLibro(Integer idLibro, Libro libroAggiornato) {
+        Libro libro = libroRepo.findById(idLibro).orElseThrow(() -> new RuntimeException("libro non trovato"));
+
+        LocalDate currentDate = LocalDate.now();
+        Date sqlDate = Date.valueOf(currentDate);
+
+        libro.setAutore(libroAggiornato.getAutore());
+        libro.setCodiceISBN(libroAggiornato.getCodiceISBN());
+        libro.setTitolo(libroAggiornato.getTitolo());
+        libro.setTrama(libroAggiornato.getTrama());
+        libro.setNumeroLettura(0);
+        libro.setDataAggiuntaLibreria(sqlDate);
+
+        libroRepo.save(libro);
+    }
+
+    public void incrementaNumeroLetture(Integer idLibro) {
+        Libro libro = libroRepo.findById(idLibro).orElseThrow(() -> new RuntimeException("libro non trovato"));
+
+        libro.setNumeroLettura(libro.getNumeroLettura() + 1);
+        libroRepo.save(libro);
     }
 
 }
