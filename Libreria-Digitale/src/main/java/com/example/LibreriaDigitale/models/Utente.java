@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity(name = "utente")
 public class Utente {
@@ -20,12 +21,16 @@ public class Utente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_utente;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String cognome;
 
+    @NotBlank
     private String email;
 
+    @NotBlank
     private String password;
 
     @ManyToMany

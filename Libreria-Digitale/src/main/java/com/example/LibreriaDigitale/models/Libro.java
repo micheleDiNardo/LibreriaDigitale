@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity(name = "libro")
 public class Libro {
@@ -20,10 +21,13 @@ public class Libro {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_libro;
 
+    @NotBlank
     private String titolo;
 
+    @NotBlank
     private String autore;
 
+    @NotBlank
     @Column(name = "codice_iBSN")
     private String codiceISBN;
 
@@ -33,6 +37,7 @@ public class Libro {
     @Column(name = "data_eliminazione")
     private Date dataEliminazione;
 
+    @NotBlank
     private String trama;
 
     @Column(name = "numero_letture")

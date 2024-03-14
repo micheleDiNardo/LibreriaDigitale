@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.swing.text.html.parser.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,13 +48,19 @@ public class ControllerLibro {
             throw new IllegalArgumentException("Token non valido");
         }
 
-        libroService.aggiungiLibroPerUtente(idUtente, idLibro);
+        try {
 
-        return ResponseEntity.ok("libro aggiunto all'utente con id: " + idUtente);
+            libroService.aggiungiLibroPerUtente(idUtente, idLibro);
+            return ResponseEntity.ok("libro aggiunto all'utente con id: " + idUtente);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("ERRORE NELLA AGGIUNTA DI LIBRO ALL'UTENTE SPECIFICO");
+        }
     }
 
     @GetMapping("/libri/utente")
-    public ResponseEntity<Set<Libro>> vediLibriPerUtente(
+    public ResponseEntity<Object> vediLibriPerUtente(
             @RequestParam("idUtente") Integer idUtente,
             @RequestHeader("Authorization") String token) {
 
@@ -60,8 +68,15 @@ public class ControllerLibro {
             throw new IllegalArgumentException("Token non valido");
         }
 
-        Set<Libro> libriUtente = libroService.vediLibriPerUtente(idUtente);
-        return ResponseEntity.ok(libriUtente);
+        try {
+
+            Set<Libro> libriUtente = libroService.vediLibriPerUtente(idUtente);
+            return ResponseEntity.ok(libriUtente);
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("ERRORE NELLA RIMOZIONE DEL LIBRO");
+        }
     }
 
     @DeleteMapping("/rimuoviLibro")
@@ -74,9 +89,15 @@ public class ControllerLibro {
             throw new IllegalArgumentException("Token non valido");
         }
 
-        libroService.rimuoviLibroPerUtente(idUtente, idLibro);
+        try {
 
-        return ResponseEntity.ok("libro con id : " + idLibro + "rimosso all'utente con id: " + idUtente);
+            libroService.rimuoviLibroPerUtente(idUtente, idLibro);
+            return ResponseEntity.ok("libro con id : " + idLibro + "rimosso all'utente con id: " + idUtente);
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("ERRORE NELLA RIMOZIONE DEL LIBRO");
+        }
     }
 
     @PutMapping("modifica")
@@ -89,9 +110,15 @@ public class ControllerLibro {
             throw new IllegalArgumentException("Token non valido");
         }
 
-        libroService.modificaLibro(idLibro, libroAggiornato);
+        try {
 
-        return ResponseEntity.ok("modificato correttamente il libro con id : " + idLibro);
+            libroService.modificaLibro(idLibro, libroAggiornato);
+            return ResponseEntity.ok("modificato correttamente il libro con id : " + idLibro);
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("ERRORE NELLA MODIFICA DEL LIBRO");
+        }
     }
 
     @PutMapping("lettura/{idLibro}")
@@ -103,9 +130,16 @@ public class ControllerLibro {
             throw new IllegalArgumentException("Token non valido");
         }
 
-        libroService.incrementaNumeroLetture(idLibro);
+        try {
 
-        return ResponseEntity.ok("il numero di letture è stato incrementato");
+            libroService.incrementaNumeroLetture(idLibro);
+            return ResponseEntity.ok("il numero di letture è stato incrementato");
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("ERRORE NELL'INCREMENTO NUMERO LETTURE");
+        }
     }
 
 }
