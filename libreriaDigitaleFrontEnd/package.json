@@ -1,5 +1,5 @@
 {
-  "name": "libreria-dig-fe",
+  "name": "libreria-digitale-front-end",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:LibreriaDigFE": "node dist/libreria-dig-fe/server/server.mjs"
+    "serve:ssr:libreriaDigitaleFrontEnd": "node dist/libreria-digitale-front-end/server/server.mjs"
   },
   "private": true,
   "dependencies": {
