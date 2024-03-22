@@ -5,10 +5,10 @@ import { UtenteCatalogoComponent } from './utente-catalogo/utente-catalogo.compo
 import { LibroDettaglioComponent } from './libro-dettaglio/libro-dettaglio.component';
 
 const routes: Routes = [
-{path: "login", component:LoginComponent},
+{path: 'login', component:LoginComponent},
+{path:'', redirectTo:'login', pathMatch: 'full'},
 {path: 'catalogoUtente', component:UtenteCatalogoComponent},
-{ path: 'dettagli/:id_libro', component: LibroDettaglioComponent}
-
+{path: 'dettagli/:id_libro', component: LibroDettaglioComponent}
 ];
 
 @NgModule({

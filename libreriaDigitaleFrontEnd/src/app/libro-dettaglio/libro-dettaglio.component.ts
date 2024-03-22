@@ -38,12 +38,11 @@ export class LibroDettaglioComponent implements OnInit {
   }
 
   submitForm(){
-    console.log(this.libroAggiornato)
-    console.log(this.id_libro)
     this.libreriaService.modificaLibroAggiornato(this.id_libro,this.libroAggiornato)
     .subscribe(data => {
       console.log(data)
     })
+
     alert("modifica eseguita con successo")
     this.router.navigate(['/catalogoUtente']);
   }

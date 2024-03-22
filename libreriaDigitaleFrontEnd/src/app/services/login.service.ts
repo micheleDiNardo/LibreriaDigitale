@@ -15,14 +15,13 @@ export class LoginService {
 
     const loginRequest = { email: email, password: password };
 
-    return this.http.post<any>('http://localhost:8080/api/login', loginRequest
-    );
+    return this.http.post<any>('http://localhost:8080/api/login', loginRequest);
   }
 
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('idUtente');
     this.router.navigate(['/login']);
-
   }
+
 }

@@ -24,9 +24,7 @@ export class UtenteCatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     let idUtente = localStorage.getItem('idUtente');
-    //let token = localStorage.getItem('token'); se funziona l'interceptor non mi serve
-    
-    //let idUtenteNum = 0;
+
     if (idUtente !== null) {
       this.idUtenteNum = parseInt(idUtente, 10);
       console.log(this.idUtenteNum);
