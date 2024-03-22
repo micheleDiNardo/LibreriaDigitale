@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CatalogoComponentComponent } from './catalogo-component/catalogo-component.component';
 import { LoginComponent } from './login/login.component';
+import { UtenteCatalogoComponent } from './utente-catalogo/utente-catalogo.component';
+import { LibroDettaglioComponent } from './libro-dettaglio/libro-dettaglio.component';
+import { BackendInterceptor } from './backend.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CatalogoComponentComponent,
-    LoginComponent
+    LoginComponent,
+    UtenteCatalogoComponent,
+    LibroDettaglioComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,12 @@ import { LoginComponent } from './login/login.component';
     FormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BackendInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

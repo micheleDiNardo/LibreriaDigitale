@@ -1,5 +1,8 @@
 package com.example.LibreriaDigitale.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +23,16 @@ public class ControllerUtente {
     private AutorizzazioneService autoService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginEmail(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> loginEmail(@RequestBody LoginRequest loginRequest) {
 
         Utente utente = autoService.login(loginRequest.getEmail(), loginRequest.getPassword());
 
         if (utente != null) {
             String token = TokenManager.generatoreToken(utente);
-            return ResponseEntity.ok().body(token);
+            Map<String, Object> response = new HashMap<>();
+            response.put("token", token);
+            response.put("idUtente", utente.getId_utente());
+            return ResponseEntity.ok().body(response);
         }
 
         return ResponseEntity.badRequest().body("Credenziali non valide");

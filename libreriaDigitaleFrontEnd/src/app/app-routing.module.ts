@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CatalogoComponentComponent } from './catalogo-component/catalogo-component.component';
 import { LoginComponent } from './login/login.component';
+import { UtenteCatalogoComponent } from './utente-catalogo/utente-catalogo.component';
+import { LibroDettaglioComponent } from './libro-dettaglio/libro-dettaglio.component';
 
 const routes: Routes = [
-{path: "catalogo", component:CatalogoComponentComponent},
-{path: "login", component:LoginComponent}
+{path: "login", component:LoginComponent},
+{path: 'catalogoUtente', component:UtenteCatalogoComponent},
+{ path: 'dettagli/:id_libro', component: LibroDettaglioComponent}
 
 ];
 

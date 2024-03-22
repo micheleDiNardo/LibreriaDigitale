@@ -142,4 +142,25 @@ public class ControllerLibro {
         }
     }
 
+    @GetMapping("libro/{idLibro}")
+    public ResponseEntity<Libro> vediLibroPerId(
+            @PathVariable Integer idLibro,
+            @RequestHeader("Authorization") String token) {
+
+        if (!TokenManager.validatoreToken(token)) {
+            throw new IllegalArgumentException("Token non valido");
+        }
+
+        try {
+
+            Libro listaLibroPerId = libroService.getLibroById(idLibro);
+            return ResponseEntity.ok(listaLibroPerId);
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+    }
+
 }

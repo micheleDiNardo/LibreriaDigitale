@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
-import { response } from 'express';
-import { error } from 'console';
+import { Router } from '@angular/router';
+import { log } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
    email: string = '';
    password: string = '';
 
-  constructor(private lservice : LoginService){}
+  constructor(private lservice : LoginService, private router: Router){}
 
   ngOnInit(): void {
     alert('email: dinardomichele@hotmail.it')
@@ -22,9 +22,17 @@ export class LoginComponent implements OnInit {
 
   login(email : string, password: string): void {
     this.lservice.login(email, password).subscribe(
-      (token) => {
+      (data) => {
+        let token = data.token;
+        let idUtente = data.idUtente;
+
         localStorage.setItem('token', token);
+        localStorage.setItem('idUtente', idUtente);
+
         console.log('Token salvato:', token);
+        console.log('idUtente : ',idUtente);
+
+        this.router.navigate(['/catalogoUtente']);
       },
       (error) => {
         console.error('Errore durante il login:', error);

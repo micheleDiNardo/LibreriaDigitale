@@ -1,0 +1,33 @@
+<button type="button" class="btn btn-info" (click)="logout()">LogOut</button>
+
+
+<h1>CATALOGO LIBRI TOTALI</h1>
+
+  <div class="card-container d-flex flex-wrap">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3" *ngFor="let item of catalogoData">
+        <div class="card mx-2">
+          <img class="card-img-top" src="../assets/png/9269766.png" alt="Card image cap" style="width: 100%;">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.titolo }}</h5>
+            <p class="card-text">{{ item.autore }}</p>
+            <a [routerLink]="['/dettagli', item.id_libro]" href="#" class="btn btn-primary">Dettagli</a> <br> <br>
+            <button type="button" class="btn btn-warning" (click)="aggiungiLibro(item.id_libro)" >Aggiungi a utente loggato</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>CATALOGO LIBRI PER L'UTENTE </h1>
+
+  <div class="card" style="width: 18rem;" *ngFor="let item of catalogoDataById">
+    <img class="card-img-top" src="../assets/png/9269766.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ item.titolo }}</h5>
+      <p class="card-text">numero letture : {{ item.numeroLettura }}</p>
+      <a [routerLink]="['/dettagli', item.id_libro]" href="#" class="btn btn-primary " >Dettagli</a> <br> <br>
+      <button type="button" class="btn btn-success" (click)="leggiLibro(item.id_libro)">Fai una lettura</button> <br><br>
+      <button type="button" class="btn btn-danger" (click)="eliminaLibro(item.id_libro)" >Elimina dalla tua area privata</button>
+    </div>
+  </div>

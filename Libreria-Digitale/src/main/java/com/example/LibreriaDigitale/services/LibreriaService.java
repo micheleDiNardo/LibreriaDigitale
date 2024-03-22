@@ -34,6 +34,7 @@ public class LibreriaService {
                 .orElseThrow(() -> new RuntimeException("Utente non trovato"));
         Libro libro = libroRepo.findById(idLibro).orElseThrow(() -> new RuntimeException("Libro non trovato"));
 
+        libro.setNumeroLettura(0);
         LocalDate currentDate = LocalDate.now();
         Date sqlDate = Date.valueOf(currentDate);
         libro.setDataAggiuntaLibreria(sqlDate);
@@ -85,6 +86,10 @@ public class LibreriaService {
 
         libro.setNumeroLettura(libro.getNumeroLettura() + 1);
         libroRepo.save(libro);
+    }
+
+    public Libro getLibroById(Integer idLibro) {
+        return libroRepo.findById(idLibro).orElseThrow(() -> new RuntimeException("libro non trovato"));
     }
 
 }

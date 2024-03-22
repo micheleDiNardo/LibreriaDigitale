@@ -1,0 +1,40 @@
+<ul >
+    <li>titolo : {{catalogoData.titolo}}</li>
+    <li>autore : {{catalogoData.autore}}</li>
+    <li>codice isbn : {{catalogoData.codiceISBN}}</li>
+    <li>trama : {{catalogoData.trama}}</li>
+    <li>numero letture : {{catalogoData.numeroLettura}}</li>
+</ul>
+
+<form (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="titolo">Titolo:</label>
+      <input type="text" class="form-control" id="titolo" name="titolo" [(ngModel)]="libroAggiornato.titolo" required>
+    </div>
+    <div class="form-group">
+      <label for="autore">Autore:</label>
+      <input type="text" class="form-control" id="autore" name="autore" [(ngModel)]="libroAggiornato.autore" required>
+    </div>
+    <div class="form-group">
+      <label for="codiceISBN">Codice ISBN:</label>
+      <input type="text" class="form-control" id="codiceISBN" name="codiceISBN" [(ngModel)]="libroAggiornato.codiceISBN" required>
+    </div>
+    <div class="form-group">
+      <label for="dataAggiuntaLibreria">Data Aggiunta Libreria:</label>
+      <input type="date" class="form-control" id="dataAggiuntaLibreria" name="dataAggiuntaLibreria" [(ngModel)]="libroAggiornato.dataAggiuntaLibreria" required>
+    </div>
+    <div class="form-group">
+      <label for="dataEliminazione">Data Eliminazione:</label>
+      <input type="date" class="form-control" id="dataEliminazione" name="dataEliminazione" [(ngModel)]="libroAggiornato.dataEliminazione">
+    </div>
+    <div class="form-group">
+      <label for="numeroLettura">Numero Lettura:</label>
+      <input type="number" class="form-control" id="numeroLettura" name="numeroLettura" [(ngModel)]="libroAggiornato.numeroLettura" required>
+    </div>
+    <div class="form-group">
+      <label for="trama">Trama:</label>
+      <textarea class="form-control" id="trama" name="trama" [(ngModel)]="libroAggiornato.trama" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Modifica</button>
+  </form>
+  
