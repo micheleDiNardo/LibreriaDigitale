@@ -1,12 +1,29 @@
-<ul >
+<!-- <ul >
     <li>titolo : {{catalogoData.titolo}}</li>
     <li>autore : {{catalogoData.autore}}</li>
     <li>codice isbn : {{catalogoData.codiceISBN}}</li>
     <li>trama : {{catalogoData.trama}}</li>
     <li>numero letture : {{catalogoData.numeroLettura}}</li>
-</ul>
+</ul> -->
 
+<div class="container">
+<ul class="list-group">
+  <li class="list-group-item active" aria-current="true">Tutti i dettagli</li>
+  <li class="list-group-item">{{catalogoData.titolo}}</li>
+  <li class="list-group-item">{{catalogoData.autore}}</li>
+  <li class="list-group-item">{{catalogoData.codiceISBN}}</li>
+  <li class="list-group-item">{{catalogoData.numeroLettura}}</li>
+  <li class="list-group-item">{{catalogoData.trama}}</li>
+</ul>
+</div>
+<br> <br> <br> <br>
+
+<div class="container" style="width: 60%; border:1px solid black">
 <form (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label style="color: blue;">FORM DI MODIFICA LIBRO</label>
+    </div>
+
     <div class="form-group">
       <label for="titolo">Titolo:</label>
       <input type="text" class="form-control" id="titolo" name="titolo" [(ngModel)]="libroAggiornato.titolo" required>
@@ -37,4 +54,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Modifica</button>
   </form>
-  
+</div>
+<br><br><br>

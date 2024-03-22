@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-info" (click)="logout()">LogOut</button>
+<button type="button" class="btn btn-info" (click)="logout()" style="margin: 15px;">LogOut</button>
 
 
 <h1>CATALOGO LIBRI TOTALI</h1>
@@ -21,6 +21,7 @@
 
   <h1>CATALOGO LIBRI PER L'UTENTE </h1>
 
+<div class="card-container">
   <div class="card" style="width: 18rem;" *ngFor="let item of catalogoDataById">
     <img class="card-img-top" src="../assets/png/9269766.png" alt="Card image cap">
     <div class="card-body">
@@ -31,3 +32,4 @@
       <button type="button" class="btn btn-danger" (click)="eliminaLibro(item.id_libro)" >Elimina dalla tua area privata</button>
     </div>
   </div>
+</div>

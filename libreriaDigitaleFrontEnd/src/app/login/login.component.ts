@@ -14,10 +14,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private lservice : LoginService, private router: Router){}
 
-  ngOnInit(): void {
-    alert('email: dinardomichele@hotmail.it')
-    alert('password: 12345678')
-  }
+  ngOnInit(): void {}
 
   login(email : string, password: string): void {
     this.lservice.login(email, password).subscribe(
